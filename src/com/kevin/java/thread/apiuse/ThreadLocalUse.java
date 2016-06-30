@@ -14,7 +14,7 @@ public class ThreadLocalUse {
 
     // ②获取下一个序列值
     public int getNextNum() {
-        seqNum.set(seqNum.get() + 1);
+        seqNum.set(seqNum.get() + 1);//seqNum相当于Key。每个Thread都有一个ThreadLocalMap成员对象，里面是以ThreadLocal对象为Key（这里是以seqNum）
         return seqNum.get();
     }
 
