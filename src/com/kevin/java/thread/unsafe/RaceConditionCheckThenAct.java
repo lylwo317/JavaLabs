@@ -25,22 +25,23 @@ public class RaceConditionCheckThenAct {//另一种自增操作，read-modify-wr
 
 
     public static void main(String[] args) {
-        RaceConditionCheckThenAct nullException = new RaceConditionCheckThenAct();
+        final RaceConditionCheckThenAct nullException = new RaceConditionCheckThenAct();
 
         for (int i = 0; i < 10000; i++) {
-            Thread thread = new Thread(() -> {
-
-                nullException.checkThenAction();
-
+            Thread thread = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    nullException.checkThenAction();
+                }
             });
 
-            Thread thread1 = new Thread(() -> {
-
-                nullException.setStringToNull();
-
-                nullException.checkThenAction();
-
-                nullException.setStringNotNull();
+            Thread thread1 = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    nullException.setStringToNull();
+                    nullException.checkThenAction();
+                    nullException.setStringNotNull();
+                }
             });
             thread.start();
 

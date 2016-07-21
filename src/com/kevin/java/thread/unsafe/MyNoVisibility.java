@@ -19,7 +19,7 @@ public class MyNoVisibility {
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -31,7 +31,7 @@ public class MyNoVisibility {
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(10);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -48,19 +48,29 @@ public class MyNoVisibility {
 
 
     public static final class SetCheck {
-        private int  a = 0;
+        private float  a = 0;
+        private long c = 0;
+        private long e = 0;
+        private int f = 0;
+        private float g = 0;
+        private boolean h = false;
         private volatile int  d = 0;
         private long b = 0;
 
         void set() {
             a =  1;
+            c = 1;
+            e = 1;
+            f = 1;
+            g = 1;
+            h = true;
             d =  1;
             b = -1;
         }
 
         boolean check() {
             return ((b ==  0) ||
-                    (b == -1 && a == 1 && d == 1));
+                    (b == -1 && a == 1 && c == 1 && d == 1));
         }
     }
 
