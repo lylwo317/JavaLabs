@@ -9,12 +9,14 @@ import java.util.List;
 public class SuppressWarningsUse {
 
 
+    @SuppressWarnings("unchcked")
     public static void main(String[] args) {
         SuppressWarningsUse warningsUse = new SuppressWarningsUse();
         warningsUse.addItems("hello");
-        @SuppressWarnings("unchcked")
         List words = new ArrayList();
         words.add("hello"); // this causes unchecked warning
+
+        String word = (String) words.get(0);
 
 
     }

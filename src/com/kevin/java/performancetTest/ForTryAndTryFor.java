@@ -1,7 +1,4 @@
 package com.kevin.java.performancetTest;
-
-import org.openjdk.jmh.annotations.Benchmark;
-
 /**
  * Created by kevin on 16-7-10.
  */
@@ -51,7 +48,7 @@ public class ForTryAndTryFor {
     }*/
 
 
-    @Benchmark
+    //@Benchmark
     public static void tryFor() {
         int j = 3;
         try {
@@ -63,7 +60,7 @@ public class ForTryAndTryFor {
         }
     }
 
-    @Benchmark
+    //@Benchmark
     public static void forTry() {
         int j = 3;
         for (int i = 0; i < 1000000; i++) {

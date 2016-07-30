@@ -1,8 +1,5 @@
 package com.kevin.java.performancetTest;
 
-import org.openjdk.jmh.annotations.Benchmark;
-
-import javax.annotation.processing.AbstractProcessor;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +22,7 @@ public class ForeachAndForInt{
         return list;
     }
 
-    @Benchmark
+    //@Benchmark
     public static void foreach() {
         List list = generateObject();
         Iterator var1 = list.iterator();

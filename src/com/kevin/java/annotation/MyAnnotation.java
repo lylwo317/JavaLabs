@@ -5,3 +5,4 @@ package com.kevin.java.annotation;
  */
 public class MyAnnotation {
 }
+                                                  
