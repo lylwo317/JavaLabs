@@ -15,12 +15,10 @@ public class SuppressWarningsUse {
         warningsUse.addItems("hello");
         List words = new ArrayList();
         words.add("hello"); // this causes unchecked warning
-
         String word = (String) words.get(0);
-
-
     }
 
+    @SuppressWarnings("unchcked")
     public void addItems(String item){
         List items = new ArrayList();
         items.add(item);

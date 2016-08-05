@@ -50,20 +50,20 @@ public class MyNoVisibility {
     public static final class SetCheck {
         private float  a = 0;
         private long c = 0;
-        private long e = 0;
+        /*private long e = 0;
         private int f = 0;
         private float g = 0;
-        private boolean h = false;
+        private boolean h = false;*/
         private volatile int  d = 0;
         private long b = 0;
 
         void set() {
             a =  1;
             c = 1;
-            e = 1;
+            /*e = 1;
             f = 1;
             g = 1;
-            h = true;
+            h = true;*/
             d =  1;
             b = -1;
         }

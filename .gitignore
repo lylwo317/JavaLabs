@@ -1,3 +1,8 @@
 out
 *.iml
 .idea
+file/
+generated/
+src/com/kevin/java/annotation/Myser.java
+src/com/kevin/java/annotation/customProccessor/CustomAnnotation.class
+src/com/kevin/java/annotation/customProccessor/UseProcessor.class
