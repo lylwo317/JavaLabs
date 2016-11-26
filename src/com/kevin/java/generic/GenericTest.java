@@ -1,5 +1,6 @@
 package com.kevin.java.generic;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,6 +21,10 @@ public class GenericTest<T> {
         genericTest.setValue(sf);
         /*GenericTest<? extends String> genericTest1 = new GenericTest<>();
         String s = genericTest1.getValue();*/
+    }
+
+    private <T extends Annotation> T getAnnotation(Class<T> annotationClass){
+        return null;
     }
 
     public T getValue() {

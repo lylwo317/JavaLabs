@@ -37,16 +37,16 @@ public class DomainBinding {
     static class Son extends Father{
         @Override
         public void f1() {
-            System.out.printf("Son.f1()");
+            System.out.printf("SonMother.f1()");
         }
 
         public void f1(char c){
-            System.out.printf("Son.f1(char c)");
+            System.out.printf("SonMother.f1(char c)");
         }
 
         @Override
         public void f1(int i){
-            System.out.printf("Son.f1(int i)");
+            System.out.printf("SonMother.f1(int i)");
         }
     }
 

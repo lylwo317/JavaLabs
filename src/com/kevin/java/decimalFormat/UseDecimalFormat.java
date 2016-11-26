@@ -8,8 +8,8 @@ import java.text.DecimalFormat;
 public class UseDecimalFormat {
 
     public static void main(String[] args) {
-        DecimalFormat df = new DecimalFormat("###.#");
+        DecimalFormat df = new DecimalFormat("0.00");
 
-        System.out.println(df.format(1));
+        System.out.println(df.format(345.342d));
     }
 }
