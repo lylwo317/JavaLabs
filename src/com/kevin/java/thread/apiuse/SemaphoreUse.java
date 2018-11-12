@@ -37,7 +37,7 @@ public class SemaphoreUse extends Thread {
             while (!getConnection()){
                 yield();
             }
-            System.out.println("获得一个连接" );
+            System.out.println("获得一个连接" + Thread.currentThread());
             Thread.sleep(300);
             releaseConnection();
         } catch (InterruptedException e) {
@@ -48,13 +48,18 @@ public class SemaphoreUse extends Thread {
     public void releaseConnection() {
         /* 释放许可 */
         semaphore.release();
-        System.out.println("释放一个连接");
+        System.out.println("释放一个连接" + Thread.currentThread());
     }
 
     public boolean getConnection() {
         /* 获取许可 */
-        boolean getAccquire = semaphore.tryAcquire();
-        return getAccquire;
+        boolean getAccquire = false;
+        try {
+            semaphore.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return true;
 //        throw new IllegalArgumentException("timeout");
     }
 }
