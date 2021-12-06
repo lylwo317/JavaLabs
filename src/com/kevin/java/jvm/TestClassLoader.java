@@ -44,7 +44,7 @@ public class TestClassLoader {
     }
 
     public static void main(String[] args) {
-        MyClassLoader myClassLoader = new MyClassLoader("/home/kevin/Workspace/IdeaProjects/JavaLabs/libs/");
+        MyClassLoader myClassLoader = new MyClassLoader("./libs/");
         try {
             Class<?> aClass = myClassLoader.loadClass("com.kevin.java.jvm.HelloClassLoader");
             Method sayHello = aClass.getDeclaredMethod("sayHello", null);

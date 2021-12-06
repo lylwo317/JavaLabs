@@ -35,7 +35,7 @@ public class SemaphoreUse extends Thread {
     public void run() {
         try {
             while (!getConnection()){
-                yield();
+//                yield();
             }
             System.out.println("获得一个连接" + Thread.currentThread());
             Thread.sleep(300);
