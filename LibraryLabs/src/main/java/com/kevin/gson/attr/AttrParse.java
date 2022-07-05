@@ -1,4 +1,4 @@
-package com.kevin.java.gson.attr;
+package com.kevin.gson.attr;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

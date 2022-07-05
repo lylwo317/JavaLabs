@@ -1,4 +1,4 @@
-package com.kevin.java.gson.attr;
+package com.kevin.gson.attr;
 
 import com.google.gson.annotations.SerializedName;
 
