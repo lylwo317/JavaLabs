@@ -45,10 +45,6 @@
             <version>1.6.3</version>
             <type>pom</type>
         </dependency>
-        <dependency>
-            <groupId>com.kevin</groupId>
-            <artifactId>annotation</artifactId>
-        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -69,13 +65,6 @@
                 <artifactId>kotlinx-coroutines-core</artifactId>
                 <version>1.6.3</version>
                 <type>pom</type>
-            </dependency>
-            <dependency>
-                <groupId>com.kevin</groupId>
-                <artifactId>annotation</artifactId>
-                <version>1.0</version>
-                <scope>system</scope>
-                <systemPath>${main.basedir}/libs/MyAnnotation.jar</systemPath>
             </dependency>
         </dependencies>
     </dependencyManagement>

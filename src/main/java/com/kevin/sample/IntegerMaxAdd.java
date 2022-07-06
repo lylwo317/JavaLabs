@@ -1,4 +1,4 @@
-package com.kevin.java.lab;
+package com.kevin.sample;
 
 /**
  * Created by kevin on 12/6/16.

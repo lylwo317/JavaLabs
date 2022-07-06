@@ -24,7 +24,33 @@ class A extends B{}
 class Example<T>{
 }
 
+interface Source<T> {
+    T nextT();
+}
+
+class Foo<T extends CharSequence & Comparable<T>>{
+    public void add(T t) {
+
+    }
+
+    public T get(){
+        return null;
+    }
+}
+
 class TestExtend{
+    private void foo(Foo<?> foo){
+        foo.add(null);//Kotlin的Foo<*>不能添加元素，只能获取
+//        String o = foo.get();
+    }
+    private void demo(Source<String> strs){
+        Source<?> objects = strs;
+        List<String> strings = new ArrayList<>();
+        if (strings instanceof ArrayList<?>) {
+
+        }
+//        CharSequence charSequence = objects.nextT();
+    }
     public static void main(String[] args) {
         // extendsT中存放的其实是T的其中一种子类或者T本身，如果我们去添加元素，其实不知道到底应该添加T或者T的哪个子类，
         // 这个时候，在进行强转的时候，肯定会出错。但是如果是从集合中将元素取出来，我们则可以知道取出来的元素肯定是T类型（全是它的子类或者T）。

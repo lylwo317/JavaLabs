@@ -1,4 +1,4 @@
-package com.kevin.java.lab;
+package com.kevin.sample;
 
 public class VersionCode {
     public static void main(String[] args) {

@@ -1,7 +1,5 @@
 package com.kevin.java.annotation.customProccessor;
 
-import com.kevin.annotation.CustomAnnotation;
-
 /**
  * Created by kevin on 7/21/16.
  */
