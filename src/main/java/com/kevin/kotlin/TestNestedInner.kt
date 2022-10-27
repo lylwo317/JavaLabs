@@ -26,6 +26,31 @@ class Outer {
     }
 }
 
+/*
+public final class Outer {
+    private final int bar = 1;
+
+    public final void addListener(@NotNull ClickListener click) {
+        Intrinsics.checkNotNullParameter(click, "click");
+    }
+
+    public static final class Nested {
+        public final int foo() {
+            return 2;
+        }
+    }
+
+    public final class Inner {
+        private final int bar = 1;
+
+        public final int foo() {
+            return Outer.this.bar;
+        }
+    }
+}
+*/
+
+
 val demo = Outer.Nested().foo() // == 2
 
 interface OuterInterface {

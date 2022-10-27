@@ -53,7 +53,7 @@ public class TestClassLoader {
         } catch (ClassNotFoundException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
             e.printStackTrace();
         }
-        System.out.println(String.class.getClassLoader());
+//        System.out.println(String.class.getClassLoader());
 //        System.out.println(com.sun.java.swing.SwingUtilities3.class.getClassLoader());
         System.out.println(TestClassLoader.class.getClassLoader());//jdk.internal.loader.ClassLoaders$AppClassLoader@17d99928
     }
