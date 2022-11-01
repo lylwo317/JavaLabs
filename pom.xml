@@ -7,7 +7,7 @@
     <groupId>com.kevin</groupId>
     <artifactId>JavaLabs</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <modules>
         <module>3rdLibraryLabs</module>
     </modules>
