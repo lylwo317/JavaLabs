@@ -1,7 +1,7 @@
 package com.kevin.java.dynamicProxy;
 
 public class MainActivity {
-    private IService iService;
+    private final IService iService;
 
     public MainActivity(IService iService) {
         this.iService = iService;

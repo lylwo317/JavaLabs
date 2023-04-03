@@ -8,7 +8,7 @@ public class UnsafePublish {
     public Holder h = new Holder(23);
 
     public static class Holder {
-        private int n;
+        private final int n;
 
         public Holder(int n) { this.n = n; }
 

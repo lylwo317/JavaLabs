@@ -18,15 +18,15 @@ public class DomainBinding {
             System.out.println("Father.f1()");
         }
         public void f1(int i){
-            System.out.printf("Father.f1(int i)");
+            System.out.print("Father.f1(int i)");
         }
 
         public void f1(Object o){
-            System.out.printf("Father.f1(Object o)");
+            System.out.print("Father.f1(Object o)");
         }
 
         public void f1(String s){
-            System.out.printf("Father.f1(String s)");
+            System.out.print("Father.f1(String s)");
         }
 
        /* public void f1(Boolean b){
@@ -37,16 +37,16 @@ public class DomainBinding {
     static class Son extends Father{
         @Override
         public void f1() {
-            System.out.printf("SonMother.f1()");
+            System.out.print("SonMother.f1()");
         }
 
         public void f1(char c){
-            System.out.printf("SonMother.f1(char c)");
+            System.out.print("SonMother.f1(char c)");
         }
 
         @Override
         public void f1(int i){
-            System.out.printf("SonMother.f1(int i)");
+            System.out.print("SonMother.f1(int i)");
         }
     }
 

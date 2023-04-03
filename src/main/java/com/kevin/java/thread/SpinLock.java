@@ -46,7 +46,7 @@ public class SpinLock {
     }
 
     public static class TestSpinLock implements Runnable {
-        private SpinLock spinLock=new SpinLock();
+        private final SpinLock spinLock=new SpinLock();
         public int counter=0;
         private void incr(){
             try(SpinLock.Lock lock=spinLock.lock()) {//保证任何时候只有一个线程对counter进行自增操作

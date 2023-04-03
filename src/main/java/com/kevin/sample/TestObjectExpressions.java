@@ -10,11 +10,11 @@ public class TestObjectExpressions {
             private final String hello = "Hello";
             private final String world = "World";
 
-            public final String getHello() {
+            public String getHello() {
                 return this.hello;
             }
 
-            public final String getWorld() {
+            public String getWorld() {
                 return this.world;
             }
 

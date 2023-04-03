@@ -6,11 +6,11 @@ public class TestPushbackStream {
     // Java code illustrating available(), close()
     // and markSupported() methods
 
-    public static void main(String arg[]) throws Exception
+    public static void main(String[] arg) throws Exception
     {
         PrintWriter pw = new PrintWriter(System.out, true);
         String str = "Geeks a computer science portal ";
-        byte b[] = str.getBytes();
+        byte[] b = str.getBytes();
         ByteArrayInputStream bout = new ByteArrayInputStream(b);
         PushbackInputStream push = new PushbackInputStream(bout,100);
 

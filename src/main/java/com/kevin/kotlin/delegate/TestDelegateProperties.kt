@@ -77,7 +77,7 @@ fun main() {
     val myClass = MyClass(10, ClassWithDelegate(30))
     // 通知：'oldName: Int' is deprecated.
     // Use 'newName' instead
-    myClass.oldName = 42
+    myClass.newName = 42
     println(myClass.newName) // 42
 
     val user = User()

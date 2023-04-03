@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
  * Created by kevin on 4/21/16.
  */
 public class FailFastTest {
-    private static List<Integer> list = new ArrayList<>();
+    private static final List<Integer> list = new ArrayList<>();
 
     /**
      * @desc:线程one迭代list

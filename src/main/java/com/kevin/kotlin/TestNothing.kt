@@ -5,7 +5,7 @@ package com.kevin.kotlin
  * Date: 2022-07-05
  */
 
-public fun <T> emptyList(): ArrayList<out T> = ArrayList<Nothing>()
+fun <T> emptyList(): ArrayList<out T> = ArrayList<Nothing>()
 
 //internal object EmptyList : ArrayList<Nothing>() {
 //

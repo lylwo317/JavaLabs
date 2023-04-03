@@ -7,7 +7,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * Created by kevin on 4/22/16.
  */
 public class ReentrantLockUse {
-    private ReentrantLock lock = new ReentrantLock();
+    private final ReentrantLock lock = new ReentrantLock();
 
     public void untimed() {
         boolean captured = lock.tryLock();

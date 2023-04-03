@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by: kevin
@@ -16,7 +17,7 @@ public class TestBufferedWriter {
         FileOutputStream fos =null;
         try {
             fos = new FileOutputStream(filenameTemp);
-            osw = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"));
+            osw = new BufferedWriter(new OutputStreamWriter(fos, StandardCharsets.UTF_8));
             osw.write(str);
             osw.flush();
         } catch (Exception e) {

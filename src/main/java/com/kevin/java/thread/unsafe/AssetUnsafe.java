@@ -91,7 +91,7 @@ public class AssetUnsafe {
 
     private static class MyCheckInstanceThread implements Runnable {
 
-        private MyAsset myAsset;
+        private final MyAsset myAsset;
 
         public MyCheckInstanceThread(MyAsset asset){
             myAsset = asset;

@@ -54,7 +54,7 @@ inline fun <reified T> Gson.fromJson(jsonStr: String) =
     fromJson(jsonStr, T::class.java)
 
 fun main() {
-    val age = 100;
+    val age = 100
     val asType = age.asType<String>()
     asType?.let {
         println(it)

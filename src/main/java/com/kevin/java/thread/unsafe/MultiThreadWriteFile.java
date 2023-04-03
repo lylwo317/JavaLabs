@@ -10,7 +10,7 @@ import java.io.IOException;
  */
 public class MultiThreadWriteFile {
 
-    private static String filePath = "hello.txt";
+    private static final String filePath = "hello.txt";
 
 
     public static void main(String[] args) {

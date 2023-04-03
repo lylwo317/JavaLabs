@@ -6,7 +6,7 @@ package com.kevin.java.thread.apiuse;
 public class ThreadLocalUse {
 
     // ①通过匿名内部类覆盖ThreadLocal的initialValue()方法，指定初始值
-    private static ThreadLocal<Integer> seqNum = new ThreadLocal<Integer>() {
+    private static final ThreadLocal<Integer> seqNum = new ThreadLocal<Integer>() {
         public Integer initialValue() {
             return 0;
         }
@@ -30,7 +30,7 @@ public class ThreadLocalUse {
     }
 
     private static class TestClient extends Thread {
-        private ThreadLocalUse sn;
+        private final ThreadLocalUse sn;
 
         public TestClient(ThreadLocalUse sn) {
             this.sn = sn;

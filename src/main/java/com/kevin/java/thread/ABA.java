@@ -10,8 +10,8 @@ import java.util.concurrent.atomic.AtomicStampedReference;
  */
 public class ABA {
 
-    private static AtomicInteger atomicInt = new AtomicInteger(100);
-    private static AtomicStampedReference<Integer> atomicStampedRef = new AtomicStampedReference<>(100, 0);
+    private static final AtomicInteger atomicInt = new AtomicInteger(100);
+    private static final AtomicStampedReference<Integer> atomicStampedRef = new AtomicStampedReference<>(100, 0);
 
     public static void main(String[] args) throws InterruptedException {
         Thread intT1 = new Thread(new Runnable() {

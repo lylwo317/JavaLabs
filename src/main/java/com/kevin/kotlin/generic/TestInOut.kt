@@ -29,9 +29,7 @@ fun demo(strs: Source<String>) {
 //  这个没问题,因为 T 是一个 out-参数
 }
 
-class TUpper{
-
-}
+class TUpper
 interface Foo <out T : TUpper>
 {
   fun get(): T

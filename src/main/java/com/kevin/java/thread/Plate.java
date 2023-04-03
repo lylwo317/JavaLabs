@@ -38,8 +38,8 @@ public class Plate {
         System.out.println("放入鸡蛋");
     }
     static class AddThread implements Runnable  {
-        private Plate plate;
-        private Object egg = new Object();
+        private final Plate plate;
+        private final Object egg = new Object();
         public AddThread(Plate plate) {
             this.plate = plate;
         }
@@ -48,7 +48,7 @@ public class Plate {
         }
     }
     static class GetThread implements Runnable  {
-        private Plate plate;
+        private final Plate plate;
         public GetThread(Plate plate) {
             this.plate = plate;
         }
@@ -56,7 +56,7 @@ public class Plate {
             plate.getEgg();
         }
     }
-    public static void main(String args[]) {
+    public static void main(String[] args) {
         Plate plate = new Plate();
         for(int i = 0; i < 10; i++) {
             new Thread(new AddThread(plate)).start();

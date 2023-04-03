@@ -13,7 +13,7 @@ import java.lang.reflect.Method;
 public class TestClassLoader {
 
     public static class MyClassLoader extends ClassLoader{
-        private String classPath;
+        private final String classPath;
 
         public MyClassLoader(String classPath) {
             this.classPath = classPath;

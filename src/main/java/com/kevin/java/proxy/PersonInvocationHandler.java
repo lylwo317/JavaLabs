@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
  * Created by kevin on 7/30/16.
  */
 public class PersonInvocationHandler implements InvocationHandler {
-    private Object concreteClass;
+    private final Object concreteClass;
 
     public PersonInvocationHandler(Object concreteClass){
         this.concreteClass=concreteClass;

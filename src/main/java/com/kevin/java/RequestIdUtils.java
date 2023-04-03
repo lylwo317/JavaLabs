@@ -10,12 +10,12 @@ import java.util.concurrent.locks.ReentrantLock;
  */
 public class RequestIdUtils {
 
-    private static Random random = new Random();
+    private static final Random random = new Random();
 
     static ReentrantLock workerLock = new ReentrantLock();
 
 
-    private static String STRING_TOKEN = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    private static final String STRING_TOKEN = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     public static String generateRequestId(int uId) {
         StringBuilder builder = new StringBuilder();

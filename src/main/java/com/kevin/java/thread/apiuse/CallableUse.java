@@ -35,7 +35,7 @@ public class CallableUse {
     }
 
     static class TaskWithResult implements Callable<String> {
-        private int id;
+        private final int id;
 
         public TaskWithResult(int id) {
             this.id = id;

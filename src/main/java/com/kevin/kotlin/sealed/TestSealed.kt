@@ -9,7 +9,7 @@ import javax.sql.DataSource
  * Date: 2022-07-05
  */
 sealed interface Error{
-    sealed class IOError(): Error{
+    sealed class IOError : Error{
         class FileReadError(val file: File): IOError()
         class DatabaseError(val source: DataSource): IOError()
     }

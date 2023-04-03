@@ -24,7 +24,7 @@ public class DynamicProxyTest {
 
         private static final String TAG = "MyInvocationHandler";
 
-        private IService service;
+        private final IService service;
 
         public MyInvocationHandler(IService service) {
             this.service = service;

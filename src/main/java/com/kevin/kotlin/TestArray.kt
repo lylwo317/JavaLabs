@@ -12,6 +12,8 @@ fun testArray(){
 }
 
 fun testLongArray(){
+    var java = LongArray::class.java
+    val longArray2:LongArray? = null
     val longArray = longArrayOf(2L)
     var l = longArray[0]
     var iterator = longArray.iterator()

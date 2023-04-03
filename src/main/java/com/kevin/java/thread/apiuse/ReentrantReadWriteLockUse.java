@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Created by kevin on 4/22/16.
  */
 public class ReentrantReadWriteLockUse {
-    private ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
+    private final ReentrantReadWriteLock rwl = new ReentrantReadWriteLock();
 
     public static void main(String[] args) {
         final ReentrantReadWriteLockUse test = new ReentrantReadWriteLockUse();

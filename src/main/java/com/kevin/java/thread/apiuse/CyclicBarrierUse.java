@@ -29,9 +29,9 @@ public class CyclicBarrierUse {
 
 class Runner implements Runnable {
     // 一个同步辅助类，它允许一组线程互相等待，直到到达某个公共屏障点 (common barrier point)
-    private CyclicBarrier barrier;
+    private final CyclicBarrier barrier;
 
-    private String name;
+    private final String name;
 
     public Runner(CyclicBarrier barrier, String name) {
         super();

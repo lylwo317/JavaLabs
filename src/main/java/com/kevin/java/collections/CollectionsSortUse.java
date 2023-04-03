@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class CollectionsSortUse {
 
-    private static List<Person> arrayList = new ArrayList<>();
+    private static final List<Person> arrayList = new ArrayList<>();
 
     private static int INDEX = 0;
 
