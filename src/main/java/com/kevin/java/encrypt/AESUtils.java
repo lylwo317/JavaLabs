@@ -1,7 +1,5 @@
 package com.kevin.java.encrypt;
 
-import sun.misc.IOUtils;
-
 import javax.crypto.Cipher;
 import javax.crypto.CipherInputStream;
 import javax.crypto.CipherOutputStream;
