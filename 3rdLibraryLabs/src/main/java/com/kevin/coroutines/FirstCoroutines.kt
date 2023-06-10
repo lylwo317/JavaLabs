@@ -1,38 +1,267 @@
 package com.kevin.coroutines
 
 import kotlinx.coroutines.*
-import retrofit2.http.GET
-import java.lang.NullPointerException
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.selects.select
+import kotlin.concurrent.thread
 import kotlin.coroutines.*
 
 /**
  * Created by: kevin
  * Date: 2023-04-28
  */
-fun main(){
+suspend fun main(){
 //    test1()
 //    test2()
 //    test3()
 //    test4()
+    testSelect()
+//    testSupervisorJob()
+//    testSupervisorJob2()
 //    testCancel()
+//    testCancel2()
+//    testChannel()
 //    testCoroutineExceptionHandler()
-    start()
+//    testException()
+//    createAndStart()
+//    createAndStart2()
+//    createAndStart3()
+//    callLaunchCoroutine()
+//    suspendFunc01(5)
+//    suspendFunc02("Hello", "A")
 }
 
-fun start(){
-    val continuation = suspend {
+//ResultKt.throwOnFailure($result);
+//CoroutineScope $this$runBlocking = (CoroutineScope) this.L$0;
+//Deferred localDeferred = FirstCoroutinesKt.getUserFromLocal($this$runBlocking, "kevin");
+//Deferred remoteDeferred = FirstCoroutinesKt.getUserFromApi($this$runBlocking, "kevin");
+//SelectBuilder selectImplementation = new SelectImplementation(getContext());
+//SelectBuilder builder = selectImplementation;
+//builder.invoke(localDeferred.getOnAwait(), new FirstCoroutinesKt$testSelect$2$userResponse$1$1(null));
+//builder.invoke(remoteDeferred.getOnAwait(), new FirstCoroutinesKt$testSelect$2$userResponse$1$2(null));
+//this.label = 1;
+//obj = selectImplementation.doSelect(this);
+//if (obj == coroutine_suspended) {
+//    return coroutine_suspended;
+//}
+suspend fun testSelect() = runBlocking{
+    val localDeferred = getUserFromLocal("kevin")
+    val remoteDeferred = getUserFromApi("kevin")
+
+    val userResponse = select {
+        localDeferred.onAwait {
+            it
+        }
+        remoteDeferred.onAwait {
+            it
+        }
+    }
+
+//    userResponse.isLocal.takeIf { it }?.let {
+//        val userFromApi = remoteDeferred.await()
+//        cacheUser(login, userFromApi)
+//        log(userFromApi)
+//    }
+
+    println(userResponse)
+}
+
+fun CoroutineScope.getUserFromApi(login: String) = async(Dispatchers.IO){
+    delay(2000)
+    "From Remote"
+}
+
+fun CoroutineScope.getUserFromLocal(login:String) = async(Dispatchers.IO){
+    delay(1000)
+    "From Local"
+}
+
+
+suspend fun testSupervisorJob2(){
+    val scope = CoroutineScope(SupervisorJob())//Job()
+    scope.launch {
+        delay(1000)
+        println("Hello")
+        throw RuntimeException()
+    }
+
+    scope.launch {
+        delay(2000)
+        println("world")
+    }.join()
+}
+
+suspend fun testSupervisorJob(){
+    val scope = CoroutineScope(EmptyCoroutineContext)//Job()
+    val launch = scope.launch(CoroutineExceptionHandler { _, exception ->
+        println("root exception handler")
+        exception.printStackTrace()
+    }) {//这里是StandaloneCoroutine : Job
+        val supervisorScope = CoroutineScope(coroutineContext + SupervisorJob())
+        supervisorScope.launch(CoroutineExceptionHandler { _, exception ->
+            println("A-a exception handler")
+            exception.printStackTrace()
+        }) {
+            println("A-a start")
+            delay(1000)
+            println("A-a end")
+            throw RuntimeException("A-a")
+        }.join()
+
+        supervisorScope.launch(CoroutineExceptionHandler { _, exception ->
+            println("A-b exception handler")
+            exception.printStackTrace()
+        }) {
+            println("A-b start")
+            delay(2000)
+            println("A-b end")
+            throw RuntimeException("A-b")
+        }.join()
+
+//        launch(SupervisorJob() + CoroutineExceptionHandler { _, exception ->
+//            println("A exception handler")
+//            exception.printStackTrace()
+//        }) {
+//            launch(CoroutineExceptionHandler { _, exception ->
+//                println("A-a exception handler")
+//                exception.printStackTrace()
+//            }) {
+//                println("A-a start")
+//                delay(1000)
+//                println("A-a end")
+//                throw RuntimeException("A-a")
+//            }
+//
+//            launch(CoroutineExceptionHandler { _, exception ->
+//                println("A-b exception handler")
+//                exception.printStackTrace()
+//            }) {
+//                println("A-b start")
+//                delay(2000)
+//                println("A-b end")
+//                throw RuntimeException("A-b")
+//            }
+//
+//            println("A start")
+//            delay(3000)
+//            println("A end")
+//            throw RuntimeException("A")
+//        }.join()//由于SupervisorJob的出现，使得这里的job没有父子关系
+    }
+
+    launch.join()
+}
+
+suspend fun testChannel(){
+     val channel = Channel<Int>()
+
+    val producer = GlobalScope.launch {
+        var i = 0
+        while (true){
+            channel.send(i++)
+            delay(1000)
+        }
+    }
+
+    val consumer = GlobalScope.launch {
+        while(true){
+            val element = channel.receive()
+            println(element)
+//            Logger.debug(element)
+        }
+    }
+
+    producer.join()
+    consumer.join()
+}
+
+class LogInterceptor : ContinuationInterceptor {
+    override val key = ContinuationInterceptor
+    override fun <T> interceptContinuation(continuation: Continuation<T>)
+            = LogContinuation(continuation)
+}
+
+class LogContinuation<T>(private val continuation: Continuation<T>)
+    : Continuation<T> by continuation {
+    override fun resumeWith(result: Result<T>) {
+        println("before resumeWith: $result")
+        continuation.resumeWith(result)
+        println("after resumeWith.")
+    }
+}
+
+suspend fun suspendFunc01(a: Int){
+    return
+}
+
+suspend fun suspendFunc02(a: String, b: String) = suspendCoroutine<Int> { continuation -> //complete
+    thread {
+        continuation.resumeWith(Result.success(5)) // ... 1
+    }
+}
+
+class ProducerScope<T> {
+    suspend fun produce(value: T){
+//        delay(1000)
+        println(value)
+    }
+}
+fun callLaunchCoroutine(){
+    launchCoroutine(ProducerScope<Int>()){
         println("In Coroutine.")
-        5
-    }.startCoroutine(object : Continuation<Int> {
-        override fun resumeWith(result: Result<Int>) {
+        produce(1024)
+        delay(1000)
+        produce(2048)
+    }
+}
+
+/**
+ * 让协程可以使用receiver中方法和成员。也就是说让协程体做为receiver的扩展函数，这样在协程体里面就可以使用receiver中的成员和方法
+ */
+fun <R, T> launchCoroutine(receiver: R, block: suspend R.() -> T) {
+    block.startCoroutine(receiver, object : Continuation<T> {
+        override fun resumeWith(result: Result<T>) {
             println("Coroutine End: $result")
         }
         override val context = EmptyCoroutineContext
     })
 }
 
+suspend fun mySuspendFun(): Int {
+    println("In Coroutine.")
+    return 5
+}
+fun createAndStart2(){
+    //createCoroutineUnintercepted(completion) 本质上就是为了调用suspend 中的create方法创建continuation
+    ::mySuspendFun
+        .startCoroutine(object : Continuation<Int> {
+        override fun resumeWith(result: Result<Int>) {//类似于回调
+            println("Coroutine End: $result")
+        }
+//        override val context = EmptyCoroutineContext
+        override val context = LogInterceptor()
+    })
+}
+
+fun createAndStart3(){
+    //createCoroutineUnintercepted(completion) 本质上就是为了调用suspend 中的create方法创建continuation
+
+    suspend {
+        suspendFunc02("Hello", "Kotlin")
+        suspendFunc02("Hello", "Coroutine")
+    }
+        .startCoroutine(object : Continuation<Int> {
+            override fun resumeWith(result: Result<Int>) {//类似于回调
+                println("Coroutine End: $result")
+            }
+//            override val context = EmptyCoroutineContext
+            override val context = LogInterceptor()
+        })
+}
+
 fun createAndStart(){
-    val continuation = suspend {
+    val continuation = suspend { //FirstCoroutinesKt$createAndStart$continuation$1
         println("In Coroutine.")
         5
     }.createCoroutine(object : Continuation<Int> {
@@ -45,18 +274,82 @@ fun createAndStart(){
     continuation.resumeWith(Result.success(Unit))
 }
 
-fun testCoroutineExceptionHandler() = runBlocking {
+class GlobalCoroutineExceptionHandler : CoroutineExceptionHandler {
+    override val key: CoroutineContext.Key<*> = CoroutineExceptionHandler
+
+    override fun handleException(context: CoroutineContext, exception: Throwable) {
+//        println("Coroutine exception: $exception")
+//        throw ExceptionSuccessfullyProcessed()
+    }
+}
+
+suspend fun testCoroutineExceptionHandler() {
     val scope = CoroutineScope(EmptyCoroutineContext)
     val launch = scope.launch(CoroutineExceptionHandler { _, exception ->
+        println("root exception handler")
         exception.printStackTrace()
     }) {
-        launch {
+        launch(CoroutineExceptionHandler { _, exception ->
+            println("A exception handler")
+            exception.printStackTrace()
+        }) {
+            launch(CoroutineExceptionHandler { _, exception ->
+                println("A-a exception handler")
+                exception.printStackTrace()
+            }) {
+                println("A-a start")
+                delay(1000)
+                println("A-a end")
+                throw RuntimeException()
+            }
+            println("A start")
             delay(3000)
+            println("A end")
             throw RuntimeException()
         }
     }
 
     launch.join()
+}
+
+suspend fun testException() {
+    val scope = CoroutineScope(Job())
+    scope.launch(CoroutineExceptionHandler { _, e ->
+        e.printStackTrace()
+    }) {
+        launch(CoroutineExceptionHandler { _, e ->
+            e.printStackTrace()
+        }) {
+            launch {
+                delay(10)
+                throw RuntimeException()
+            }
+            delay(10)
+//            throw RuntimeException()
+        }
+    }.join()
+}
+
+suspend fun testCancel2() {
+    val scope = CoroutineScope(Job())
+    val jobA = scope.launch(CoroutineName("A")) {
+        val jobChildA = launch(CoroutineName("child-A")) {
+            delay(1000)
+            println("xxx in child-A")
+        }
+        val jobChildB = launch(CoroutineName("child-B")) {
+            delay(1000)
+            println("xxx in child-B")
+        }
+        jobChildA.cancel()
+    }
+    val jobB = scope.launch(CoroutineName("B")) {
+        delay(500)
+        println("xxx in B")
+    }
+//    scope.cancel()
+    jobA.join()
+    jobB.join()
 }
 
 fun testCancel() = runBlocking {

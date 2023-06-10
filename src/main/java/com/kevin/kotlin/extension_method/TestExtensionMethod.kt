@@ -15,22 +15,6 @@ fun TestInterface(): TestInterface?{
     return null
 }
 
-fun TestInterface.launch1(block: () -> Unit){
-    block.test1()
-}
-
-fun (() -> Unit).test1(): Unit{
-    println("test1")
-}
-
-fun TestInterface.launch2(block: TestInterface.() -> Unit){
-    block.test2()
-}
-
-fun <T> (T.() -> Unit).test2(): Unit{
-    println("test2")
-}
-
 class MyClass {
     fun someFunction() {
         println("Original function")
@@ -56,4 +40,22 @@ fun main() {
 
     }
 
+}
+
+fun TestInterface.launch1(block: () -> Unit){
+//    block.test1()
+}
+
+//函数的扩展函数
+fun (() -> Unit).test1(): Unit{
+    println("test1")
+}
+
+fun TestInterface.launch2(block: TestInterface.() -> Unit){
+//    block.test2()
+}
+
+//扩展函数的扩展函数
+fun <T> (T.() -> Unit).test2(): Unit{
+    println("test2")
 }
